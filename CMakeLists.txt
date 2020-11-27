@@ -25,3 +25,7 @@ if(LIBQMORE_BUILD_TESTS)
     add_subdirectory(thirdparty/googletest)
     add_subdirectory(libqmoretests)
 endif()
+
+
+# Add a dummy non-built target to make Qt Creator IDE list additional files
+add_custom_target(extra SOURCES README.md)

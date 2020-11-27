@@ -1,0 +1,12 @@
+#ifndef QMOREWIDGETS_GLOBAL_H
+#define QMOREWIDGETS_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QMOREWIDGETS_LIBRARY)
+#  define QMOREWIDGETS_EXPORT Q_DECL_EXPORT
+#else
+#  define QMOREWIDGETS_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QMOREWIDGETS_GLOBAL_H

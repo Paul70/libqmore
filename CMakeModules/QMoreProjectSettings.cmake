@@ -5,8 +5,6 @@
 #
 # *******************************************************************************************************************************
 
-
-
 # Recommanded global settings for projects based on C/C++ (a C++17 compiler is mandatory!)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -16,14 +14,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-
 # find Qt package
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Gui LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Gui LinguistTools REQUIRED)
 
+# set the Qt language
+set(TS_FILES libqmore_en_US.ts)
 
-# set the projects's language
-set(TS_FILES libqtwidgets_en_US.ts)
+# This is a useless variable introduced by Qt Creator.
+# Unsetting this removes warnings while cmake runs.
+unset(QT_QMAKE_EXECUTABLE)
 
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -O0")

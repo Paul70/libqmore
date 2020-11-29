@@ -56,8 +56,7 @@ function(headerTest)
                     message(STATUS "   examining source ${source}")
 
                     # read out all full header file paths (i.e. /../../../<header_name>.h) for each source file
-                    #get_filename_component(intermediate_source_path ${source} DIRECTORY)
-                    get_filename_component(intermediate_source_path ${source} PATH)
+                    get_filename_component(intermediate_source_path ${source} DIRECTORY)
                     get_filename_component(source_name_we ${source} NAME_WE)
                     #set(header "${CMAKE_CURRENT_SOURCE_DIR}/${subdir}/${intermediate_source_path}/${source_name_we}.h")
                     set(header "${subdir}/${intermediate_source_path}${source_name_we}.h")
@@ -70,8 +69,8 @@ function(headerTest)
                         # setup the header test source file (.cpp), i.e. the little main() programme including only
                         # the current header, in the project's binary directory
                         file(RELATIVE_PATH relative_header_path ${CMAKE_CURRENT_SOURCE_DIR}/.. ${header})
-                        #get_filename_component(relative_header_path ${relative_header_path} DIRECTORY)
-                        get_filename_component(relative_header_path ${relative_header_path} PATH)
+                        get_filename_component(relative_header_path ${relative_header_path} DIRECTORY)
+
                         message(STATUS "   relative path from top level source directory is ${relative_header_path}")
                         set(header_test_source_file ${CMAKE_CURRENT_BINARY_DIR}/${relative_header_path}/main_${source_name_we}.cpp)
 
@@ -89,9 +88,31 @@ function(headerTest)
                         file(GENERATE OUTPUT ${header_test_source_file}
                              CONTENT "#include \"${header}\"\nint main()\n{\nreturn(0);\n}")
 
+                        # For some reason (older cmake?) we are not allowed to create an
+                        # object library with other libs linking to it under Linux toolchains.
+                        if(QMORE_TOOLCHAIN STREQUAL QMORE_MSVC OR QMORE_TOOLCHAIN STREQUAL QMORE_MINGW_NATIVE)
+                            add_library(${header_test_target} OBJECT ${header_test_source_file})
+                        else()
+                            add_library(${header_test_target} STATIC ${header_test_source_file})
+                        endif()
 
+                        # set include directories and link the newly created library target
+                        get_property(header_test_target_include_directories
+                            TARGET ${target}
+                            PROPERTY INCLUDE_DIRECTORIES
+                        )
+                        message(STATUS "   providing include directories ${header_test_target_include_directories}")
+                        target_include_directories(${header_test_target} PRIVATE ${header_test_target_include_directories})
 
+                        get_property(header_test_target_link_libraries
+                            TARGET ${target}
+                            PROPERTY LINK_LIBRARIES
+                        )
+                        message(STATUS "   providing link libraries ${header_test_target_link_libraries}")
+                        target_link_libraries(${header_test_target} PRIVATE ${header_test_target_link_libraries})
 
+                        # put the compiled output files in the right binary directory
+                        set_target_properties(${header_test_target} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${relative_header_path})
                     else()
                         message(STATUS "   could not find ${header}")
                     endif()
@@ -100,3 +121,19 @@ function(headerTest)
         endforeach()
     endforeach()
 endfunction()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

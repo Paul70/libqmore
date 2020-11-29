@@ -11,10 +11,14 @@ endif()
 
 # include CMakemodules directories
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules)
+include(QMoreHeaderTesting)
 include(QMoreProjectSettings)
 
+
 # set build options
+option(LIBQMORE_BUILD_HEADER_TEST "Test all libw C++ headers using a stand-alone main" ON)
 option(LIBQMORE_BUILD_TESTS "Build Google Tests test suite" ON)
+
 
 
 # add shared library qmorewidgets
@@ -29,3 +33,8 @@ endif()
 
 # Add a dummy non-built target to make Qt Creator IDE list additional files
 add_custom_target(extra SOURCES README.md)
+
+# Add header tests (this code must always come last so that  it can pick up all headers up to this point)
+if(LIBQMORE_BUILD_HEADER_TEST)
+    add_subdirectory(headertest)
+endif()

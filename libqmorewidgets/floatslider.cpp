@@ -1,6 +1,8 @@
 #include <math.h>
 #include "floatslider.h"
 
+#include <QDebug>
+
 
 namespace QtWidgets {
 
@@ -92,21 +94,21 @@ double FloatSlider::minimum() const
 
 void FloatSlider::setValue(const double newValue)
 {
-    QSlider::setValue(static_cast<int>(newValue * scaling()));
+    QSlider::setValue(static_cast<int>(newValue * scaling() + ADD_));
 }
 
 
 
 double FloatSlider::value() const
 {
-    return QSlider::value() * 1 / scaling();
+    return QSlider::value() * 1 / scaling() +ADD_;
 }
 
 
 
 void FloatSlider::rescale(const int value)
 {
-    emit QAbstractSlider::valueChanged(value * 1 / scaling());
+    emit FloatSlider::valueChanged(value * 1 / scaling());
 }
 
 } // namespace QtCustomWidgets

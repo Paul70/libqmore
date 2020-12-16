@@ -14,8 +14,7 @@ protected:
 
     ~FloatSliderTest() = default;
 
-
-
+    static constexpr double ADD_ {0.00001};
     QtWidgets::FloatSlider sliderAccuruacyOne_;
     QtWidgets::FloatSlider sliderAccuruacyTwo_;
     QtWidgets::FloatSlider sliderAccuruacyThree_;

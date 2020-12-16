@@ -99,6 +99,7 @@ signals:
 
     // still to come
     // - signal void sliderMove(int);
+    // test signals with qSpySignal
 
 
 private:
@@ -106,7 +107,7 @@ private:
 
     double scaling() const;
 
-
+    static constexpr double ADD_ {0.00001};
     const SliderAccuracy accuracy_;
 
 }; // class FloatSlider

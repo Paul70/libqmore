@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.0, 2020-11-29T15:46:26. -->
+<!-- Written by QtCreator 4.13.0, 2020-12-16T17:01:33. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -69,6 +69,8 @@
     <value type="Qt::CheckState" key="/home/paul/Documents/200_Projects/210_Software/211_CC++/libqmore/libqmoretests/floatslidertest.cpp:accuracyWorks">Checked</value>
     <value type="Qt::CheckState" key="/home/paul/Documents/200_Projects/210_Software/211_CC++/libqmore/libqmoretests/floatslidertest.cpp:maximumWorks">Checked</value>
     <value type="Qt::CheckState" key="/home/paul/Documents/200_Projects/210_Software/211_CC++/libqmore/libqmoretests/floatslidertest.cpp:setMaximumWorks">Checked</value>
+    <value type="Qt::CheckState" key="/home/paul/Documents/200_Projects/210_Software/211_CC++/libqmore/libqmoretests/floatslidertest.cpp:setValueWorks">Checked</value>
+    <value type="Qt::CheckState" key="/home/paul/Documents/200_Projects/210_Software/211_CC++/libqmore/libqmoretests/floatslidertest.cpp:valueWorks">Checked</value>
    </valuemap>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>
@@ -368,6 +370,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/paul/Documents/200_Projects/210_Software/211_CC++/build-libqmore-Desktop_Qt_5_15_0_GCC_64bit-Debug/libqmoretests</value>
    </valuemap>

@@ -13,6 +13,7 @@ FloatSlider::FloatSlider(QWidget *parent) :
 {
     QSlider::setMaximum(QSlider::maximum() * scaling());
     connect(this, &QSlider::valueChanged, this, &FloatSlider::rescale);
+    connect(this, &QSlider::sliderMoved, this, &FloatSlider::rescale);
 }
 
 
@@ -66,6 +67,7 @@ double FloatSlider::scaling() const
 void FloatSlider::setMaximum(const double max)
 {
     QSlider::setMaximum(static_cast<int>(max * scaling()));
+    emit rangeChanged(minimum(), maximum());
 }
 
 
@@ -73,6 +75,7 @@ void FloatSlider::setMaximum(const double max)
 void FloatSlider::setMinimum(const double min)
 {
     QSlider::setMinimum(static_cast<int>(min * scaling()));
+    emit rangeChanged(minimum(), maximum());
 }
 
 
@@ -101,14 +104,17 @@ void FloatSlider::setValue(const double newValue)
 
 double FloatSlider::value() const
 {
-    return QSlider::value() * 1 / scaling() +ADD_;
+    return QSlider::value() * 1 / scaling() + ADD_;
 }
 
 
 
 void FloatSlider::rescale(const int value)
 {
-    emit FloatSlider::valueChanged(value * 1 / scaling());
+    emit FloatSlider::valueChanged(value * 1 / scaling() + ADD_);
+    if(QSlider::isSliderDown()){
+        emit FloatSlider::sliderMoved(value * 1 / scaling() + ADD_);
+    }
 }
 
 } // namespace QtCustomWidgets

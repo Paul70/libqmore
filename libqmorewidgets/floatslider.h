@@ -31,6 +31,8 @@ namespace QtWidgets {
  *
  */
 
+ // still to come: Notiz bezgl. der int functions
+
 
 QT_REQUIRE_CONFIG(slider);
 
@@ -66,11 +68,11 @@ public:
 
     //! \brief setMaximum - set the slider's maximal value
     //!
-    void setMaximum(const double);
+    void setMaximum(const double max);
 
     //! \brief setMinimum - set the slider's minimal value
     //!
-    void setMinimum(const double);
+    void setMinimum(const double min);
 
     //! \brief maximum - return the slider's current maximal value
     //!
@@ -83,7 +85,7 @@ public:
 
     //! \brief setValue - sets the slider's value to the given input value
     //!
-    void setValue(const double);
+    void setValue(const double value);
 
     //! \brief value - returns the slider's current value
     //!
@@ -91,14 +93,16 @@ public:
 
 
 private slots:
-    void rescale(const int);
+    void rescale(const int value);
 
 
 signals:
-    void valueChanged(const double);
+    void valueChanged(const double value);
+    void rangeChanged(const double min, const double max);
+    void sliderMoved(const double value);
 
-    // still to come
-    // - signal void sliderMove(int);
+
+    // still to come:
     // test signals with qSpySignal
 
 

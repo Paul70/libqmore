@@ -18,7 +18,7 @@ include(QMoreProjectSettings)
 # set build options
 option(LIBQMORE_BUILD_HEADER_TEST "Test all libw C++ headers using a stand-alone main" ON)
 option(LIBQMORE_BUILD_TESTS "Build Google Tests test suite" ON)
-
+option(LIBQMORE_BUILD_EXAMPLES "Build libqmore examples" ON)
 
 
 # add shared library qmorewidgets
@@ -30,9 +30,14 @@ if(LIBQMORE_BUILD_TESTS)
     add_subdirectory(libqmoretests)
 endif()
 
+# add executables in examples directory
+if(LIBQMORE_BUILD_EXAMPLES)
+    add_subdirectory(example)
+endif()
 
 # Add a dummy non-built target to make Qt Creator IDE list additional files
 add_custom_target(extra SOURCES README.md)
+
 
 # Add header tests (this code must always come last so that  it can pick up all headers up to this point)
 if(LIBQMORE_BUILD_HEADER_TEST)

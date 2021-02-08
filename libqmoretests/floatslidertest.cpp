@@ -3,9 +3,9 @@
 using namespace QtWidgets;
 
 FloatSliderTest::FloatSliderTest() :
-    sliderAccuruacyOne_  (FloatSlider::SliderAccuracy::eDecPlaceOne),
-    sliderAccuruacyTwo_  (FloatSlider::SliderAccuracy::eDecPlaceTwo),
-    sliderAccuruacyThree_(FloatSlider::SliderAccuracy::eDecPlaceThree)
+    sliderAccuruacyOne_  (FloatSlider::DecimalAccuracy::eDecPlaceOne),
+    sliderAccuruacyTwo_  (FloatSlider::DecimalAccuracy::eDecPlaceTwo),
+    sliderAccuruacyThree_(FloatSlider::DecimalAccuracy::eDecPlaceThree)
 {
 }
 
@@ -78,9 +78,9 @@ TEST_F(FloatSliderTest, setValueWorks)
 
 TEST_F(FloatSliderTest, accuracyWorks)
 {
-    EXPECT_TRUE(sliderAccuruacyOne_.accuracy() == FloatSlider::SliderAccuracy::eDecPlaceOne ||
-                sliderAccuruacyOne_.accuracy() == FloatSlider::SliderAccuracy::eDecPlaceTwo ||
-                sliderAccuruacyOne_.accuracy() == FloatSlider::SliderAccuracy::eDecPlaceThree);
+    EXPECT_TRUE(sliderAccuruacyOne_.accuracy() == FloatSlider::DecimalAccuracy::eDecPlaceOne ||
+                sliderAccuruacyOne_.accuracy() == FloatSlider::DecimalAccuracy::eDecPlaceTwo ||
+                sliderAccuruacyOne_.accuracy() == FloatSlider::DecimalAccuracy::eDecPlaceThree);
 };
 
 

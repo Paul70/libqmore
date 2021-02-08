@@ -21,8 +21,6 @@ protected:
     QtWidgets::FloatSlider sliderAccuruacyTwo_;
     QtWidgets::FloatSlider sliderAccuruacyThree_;
 
-
-
 };
 
 #endif // FLOATSLIDERTEST_H

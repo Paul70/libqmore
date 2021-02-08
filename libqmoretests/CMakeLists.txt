@@ -1,5 +1,6 @@
 add_executable(qmoretests
     floatslidertest.cpp
+    ledindicatortest.cpp
     main.cpp
 )
 

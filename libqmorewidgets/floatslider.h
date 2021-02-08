@@ -24,14 +24,15 @@ namespace QtWidgets {
  *       Therefore its interface is very similar to the one of QSlider class. Often, the class functions share the same names
  *       and differ only in their signatures. For example, the QSlider method "setValue" has the signature: <void>(int)
  *       whereas FloarSlider's "setValue"  has <void>(const double).
+ *       In other words, it is intentional that FloatSlider class objects are used exactly like QSlider objects. The Floatslider class
+ *       also only provides code to enable the support for floating point values. If you want to use all other features and
+ *       methods provided by QSlider class, use the QSlider class interface.
  *
  * For more information see the Qt QSilder and QAbstractSlider web page:
  * https://doc.qt.io/qt-5/qslider.html#details
  *
  *
  */
-
- // still to come: Notiz bezgl. der int functions
 
 
 QT_REQUIRE_CONFIG(slider);
@@ -42,7 +43,7 @@ class FloatSlider : public QSlider
     Q_OBJECT
 
 public:
-    enum class SliderAccuracy : std::uint16_t {
+    enum class DecimalAccuracy : std::uint16_t {
         eDecPlaceOne   = 10,
         eDecPlaceTwo   = 100,
         eDecPlaceThree = 1000
@@ -50,20 +51,20 @@ public:
 
 
     //!
-    //! \brief Constructor
+    //! \brief Constructor - there are three consructors available
     //!
     explicit FloatSlider(QWidget *parent = nullptr);
-    explicit FloatSlider(const SliderAccuracy, QWidget * parent = nullptr);
-    explicit FloatSlider(const SliderAccuracy, const Qt::Orientation, QWidget  * parent = nullptr);
+    explicit FloatSlider(const DecimalAccuracy, QWidget * parent = nullptr);
+    explicit FloatSlider(const DecimalAccuracy, const Qt::Orientation, QWidget  * parent = nullptr);
 
 
     ~FloatSlider();
 
 
     //! \brief accuracy - query the slider's deciaml accuracy
-    //! \return enum class SliderAccuracy
+    //! \return enum class DecimalAccuracy
     //!
-    SliderAccuracy accuracy() const;
+    DecimalAccuracy accuracy() const;
 
 
     //! \brief setMaximum - set the slider's maximal value
@@ -102,17 +103,13 @@ signals:
     void sliderMoved(const double value);
 
 
-    // still to come:
-    // test signals with qSpySignal
-
-
 private:
     Q_DISABLE_COPY(FloatSlider)
 
     double scaling() const;
 
     static constexpr double ADD_ {0.00001};
-    const SliderAccuracy accuracy_;
+    const DecimalAccuracy accuracy_;
 
 }; // class FloatSlider
 }  // namespace QtWidget

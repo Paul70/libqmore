@@ -5,6 +5,7 @@
 
 class QLabel;
 class QWidget;
+class QSlider;
 namespace QtWidgets {
     class FloatSlider;
 }
@@ -18,6 +19,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow() = default;
 
+    void setNewValueSliderOne(const double);
+    void setNewValueSliderTwo(const double);
+    void setNewValueSliderThree(const double);
+
     void onButtonLeftSliderOneClicked();
     void onButtonRightSliderOneClicked();
     void onButtonLeftSliderTwoClicked();
@@ -26,6 +31,10 @@ public:
     void onButtonRightSliderThreeClicked();
 
 private:
+    void setTextLabelSliderOne(const double);
+    void setTextLabelSliderTwo(const double);
+    void setTextLabelSliderThree(const double);
+
     void createWidgets();
 
     QWidget * pCentralWidget_;

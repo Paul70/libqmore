@@ -1,7 +1,9 @@
 add_library(qmorewidgets SHARED
   floatslider.cpp
+  ledindicator.cpp
 
   floatslider.h
+  ledindicator.h
   qmorewidgets_global.h
 
   ${CMAKE_SOURCE_DIR}/${TS_FILES}

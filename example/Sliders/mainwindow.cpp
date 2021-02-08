@@ -11,11 +11,11 @@ MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
 
     pCentralWidget_      (new QWidget(this)),
-    pSliderDecPointOne_  (new QtWidgets::FloatSlider(QtWidgets::FloatSlider::SliderAccuracy::eDecPlaceOne,
+    pSliderDecPointOne_  (new QtWidgets::FloatSlider(QtWidgets::FloatSlider::DecimalAccuracy::eDecPlaceOne,
                                                      Qt::Orientation::Horizontal)),
-    pSliderDecPointTwo_  (new QtWidgets::FloatSlider(QtWidgets::FloatSlider::SliderAccuracy::eDecPlaceTwo,
+    pSliderDecPointTwo_  (new QtWidgets::FloatSlider(QtWidgets::FloatSlider::DecimalAccuracy::eDecPlaceTwo,
                                                      Qt::Orientation::Horizontal)),
-    pSliderDecPointThree_(new QtWidgets::FloatSlider(QtWidgets::FloatSlider::SliderAccuracy::eDecPlaceThree,
+    pSliderDecPointThree_(new QtWidgets::FloatSlider(QtWidgets::FloatSlider::DecimalAccuracy::eDecPlaceThree,
                                                      Qt::Orientation::Horizontal)),
     pValueLabelSliderOne_  (new QLabel()),
     pValueLabelSliderTwo_  (new QLabel()),
@@ -25,13 +25,29 @@ MainWindow::MainWindow(QWidget *parent):
 }
 
 
+void MainWindow::setNewValueSliderOne(const double value)
+{
+    setTextLabelSliderOne(value);
+}
+
+
+void MainWindow::setNewValueSliderTwo(const double value)
+{
+    setTextLabelSliderTwo(value);
+}
+
+
+void MainWindow::setNewValueSliderThree(const double value)
+{
+    setTextLabelSliderThree(value);
+}
+
+
 void MainWindow::onButtonLeftSliderOneClicked()
 {
     // decrease slider value for 0.1
     pSliderDecPointOne_->setValue(pSliderDecPointOne_->value() - 0.1);
-    QString str;
-    pValueLabelSliderOne_->setText(str.setNum(pSliderDecPointOne_->value(),'f', 1));
-
+    setTextLabelSliderOne(pSliderDecPointOne_->value());
 }
 
 
@@ -39,34 +55,60 @@ void MainWindow::onButtonRightSliderOneClicked()
 {
     // increase slider value for 0.1
     pSliderDecPointOne_->setValue(pSliderDecPointOne_->value() + 0.1);
-    QString str;
-    pValueLabelSliderOne_->setText(str.setNum(pSliderDecPointOne_->value(),'f', 1));
+    setTextLabelSliderOne(pSliderDecPointOne_->value());
 }
 
 
 void MainWindow::onButtonLeftSliderTwoClicked()
 {
     // decrease slider value for 0.01
+    pSliderDecPointTwo_->setValue(pSliderDecPointTwo_->value() - 0.01);
+    setTextLabelSliderTwo(pSliderDecPointTwo_->value());
 }
 
 
 void MainWindow::onButtonRightSliderTwoClicked()
 {
     // increase slider value for 0.01
-
+    pSliderDecPointTwo_->setValue(pSliderDecPointTwo_->value() + 0.01);
+    setTextLabelSliderTwo(pSliderDecPointTwo_->value());
 }
 
 
 void MainWindow::onButtonLeftSliderThreeClicked()
 {
     // decrease slider value for 0.001
+    pSliderDecPointThree_->setValue(pSliderDecPointThree_->value() - 0.001);
+    setTextLabelSliderThree(pSliderDecPointThree_->value());
 }
 
 
 void MainWindow::onButtonRightSliderThreeClicked()
 {
     // increase slider value for 0.001
+    pSliderDecPointThree_->setValue(pSliderDecPointThree_->value() + 0.001);
+    setTextLabelSliderThree(pSliderDecPointThree_->value());
+}
 
+
+void MainWindow::setTextLabelSliderOne(const double value)
+{
+    QString str;
+    pValueLabelSliderOne_->setText(str.setNum(value,'f', 1));
+}
+
+
+void MainWindow::setTextLabelSliderTwo(const double value)
+{
+    QString str;
+    pValueLabelSliderTwo_->setText(str.setNum(value,'f', 2));
+}
+
+
+void MainWindow::setTextLabelSliderThree(const double value)
+{
+    QString str;
+    pValueLabelSliderThree_->setText(str.setNum(value,'f', 3));
 }
 
 
@@ -92,7 +134,8 @@ void MainWindow::createWidgets()
     pMainLayout->addWidget(pButtonLeftS1,1,3,1,1);
     pMainLayout->addWidget(pButtonRightS1,1,4,1,1);
 
-    //connections
+    //connections for slider with one decimal place
+    connect(pSliderDecPointOne_, &QtWidgets::FloatSlider::sliderMoved, this, &MainWindow::setNewValueSliderOne);
     connect(pButtonLeftS1,  &QPushButton::clicked, this, &MainWindow::onButtonLeftSliderOneClicked);
     connect(pButtonRightS1, &QPushButton::clicked, this, &MainWindow::onButtonRightSliderOneClicked);
 
@@ -112,7 +155,8 @@ void MainWindow::createWidgets()
     pMainLayout->addWidget(pButtonLeftS2,3,3,1,1);
     pMainLayout->addWidget(pButtonRightS2,3,4,1,1);
 
-    //connections
+    //connections for slider with two decimal places
+    connect(pSliderDecPointTwo_, &QtWidgets::FloatSlider::sliderMoved, this, &MainWindow::setNewValueSliderTwo);
     connect(pButtonLeftS2, &QPushButton::clicked, this, &MainWindow::onButtonLeftSliderTwoClicked);
     connect(pButtonRightS2, &QPushButton::clicked, this, &MainWindow::onButtonRightSliderTwoClicked);
 
@@ -132,7 +176,8 @@ void MainWindow::createWidgets()
     pMainLayout->addWidget(pButtonLeftS3,5,3,1,1);
     pMainLayout->addWidget(pButtonRightS3,5,4,1,1);
 
-    // connections
+    // connections for slider with three decimal places
+    connect(pSliderDecPointThree_, &QtWidgets::FloatSlider::sliderMoved, this, &MainWindow::setNewValueSliderThree);
     connect(pButtonLeftS3, &QPushButton::clicked, this, &MainWindow::onButtonLeftSliderThreeClicked);
     connect(pButtonRightS3, &QPushButton::clicked, this, &MainWindow::onButtonRightSliderThreeClicked);
 }

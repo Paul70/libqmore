@@ -1,4 +1,3 @@
-#include <math.h>
 #include "floatslider.h"
 
 #include <QDebug>
@@ -9,40 +8,42 @@ namespace QtWidgets {
 
 FloatSlider::FloatSlider(QWidget *parent) :
     QSlider   (parent),
-    accuracy_ {SliderAccuracy::eDecPlaceOne}
+    accuracy_ {DecimalAccuracy::eDecPlaceOne}
 {
     QSlider::setMaximum(QSlider::maximum() * scaling());
     connect(this, &QSlider::valueChanged, this, &FloatSlider::rescale);
-    connect(this, &QSlider::sliderMoved, this, &FloatSlider::rescale);
+    connect(this, &QSlider::sliderMoved,  this, &FloatSlider::rescale);
 }
 
 
-FloatSlider::FloatSlider(const SliderAccuracy accuracy, QWidget  * parent) :
+FloatSlider::FloatSlider(const DecimalAccuracy accuracy, QWidget  * parent) :
     QSlider   (parent),
     accuracy_ {accuracy}
 {
     QSlider::setMaximum(QSlider::maximum() * scaling());
     connect(this, &QSlider::valueChanged, this, &FloatSlider::rescale);
+    connect(this, &QSlider::sliderMoved,  this, &FloatSlider::rescale);
 }
 
 
-FloatSlider::FloatSlider(const SliderAccuracy accuracy, const Qt::Orientation orientation, QWidget *parent) :
+FloatSlider::FloatSlider(const DecimalAccuracy accuracy, const Qt::Orientation orientation, QWidget *parent) :
     QSlider   (parent),
     accuracy_ {accuracy}
 {
     QSlider::setOrientation(orientation);
     QSlider::setMaximum(QSlider::maximum() * scaling());
     connect(this, &QSlider::valueChanged, this, &FloatSlider::rescale);
+    connect(this, &QSlider::sliderMoved,  this, &FloatSlider::rescale);
 }
 
 
 FloatSlider::~FloatSlider()
 {
 
-}
+}QT_REQUIRE_CONFIG(slider);
 
 
-FloatSlider::SliderAccuracy FloatSlider::accuracy() const
+FloatSlider::DecimalAccuracy FloatSlider::accuracy() const
 {
     return accuracy_;
 }
@@ -51,11 +52,11 @@ FloatSlider::SliderAccuracy FloatSlider::accuracy() const
 double FloatSlider::scaling() const
 {
     switch (accuracy_) {
-    case SliderAccuracy::eDecPlaceOne:   return 10.0;
+    case DecimalAccuracy::eDecPlaceOne:   return 10.0;
         break;
-    case SliderAccuracy::eDecPlaceTwo:   return 100.0;
+    case DecimalAccuracy::eDecPlaceTwo:   return 100.0;
         break;
-    case SliderAccuracy::eDecPlaceThree: return 1000.0;
+    case DecimalAccuracy::eDecPlaceThree: return 1000.0;
         break;
     default: return 10.0;
     }
@@ -91,7 +92,6 @@ double FloatSlider::minimum() const
 {
     return QSlider::minimum() * 1 / scaling();
 }
-
 
 
 

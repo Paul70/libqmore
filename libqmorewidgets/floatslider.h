@@ -30,6 +30,7 @@ namespace QtWidgets {
  *
  * For more information see the Qt QSilder and QAbstractSlider web page:
  * https://doc.qt.io/qt-5/qslider.html#details
+ * dddd
  *
  *
  */

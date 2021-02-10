@@ -15,10 +15,13 @@ namespace QtWidgets{
  *  - state blinking
  *  - state other (placeholder for a user defined state)
  *
+ * The color of each state is not unchangable. See the 'setColor' and 'getColor' function to define
+ * your own color for each led state.
+ *
  * LedIndicator calss inherits from QWidget class
  *
  * See the example "LedLights" in the example directory demonstrating the basic usage of this class
- * and the README file
+ * and the library's documentation repository.
  *
  *
  * For more information also see the QWidget web page:

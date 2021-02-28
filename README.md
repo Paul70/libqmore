@@ -12,6 +12,7 @@ Support for the following toolchain will be available soon:
 * mingw_native: This uses the MSYS2 software packages to build native windows packages (.exe and .dll) on a Windows host.
 
 Currently, support for msvc is under investigation.
+
 The project libqmore supports cmake as build system.
 This library was developed using Qt Creator as IDE. I did not test other IDEs which support cmake.
 

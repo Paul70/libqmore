@@ -29,8 +29,9 @@ soon.
 Run the example executables to get a basic usage exmaple and to see what functionality the widgets offer.
 
 When using the clang toolchain I had to install the following packages manually:
-* sudp apt-get install qtbase5-dev
-* sudp apt-get install qtbase5-dev
+* $ sudp apt-get install qtbase5-dev
+* $ sudp apt-get install qtdeclarative5-dev
+* $ sudp apt-get install qttools5-dev
 
 
 ## Widgets

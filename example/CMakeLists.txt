@@ -7,9 +7,7 @@ add_executable(Sliders
 
 target_include_directories(Sliders PRIVATE ..)
 target_link_libraries(Sliders PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-                              PUBLIC  qmorewidgets
-)
-
+                              PUBLIC  qmorewidgets)
 
 add_executable(LedLights
   LedLights/main.cpp
@@ -20,7 +18,6 @@ add_executable(LedLights
 
 target_include_directories(LedLights PRIVATE ..)
 target_link_libraries(LedLights PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-                                PUBLIC  qmorewidgets
-)
+                                PUBLIC  qmorewidgets)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
